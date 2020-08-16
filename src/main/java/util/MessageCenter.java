@@ -15,6 +15,7 @@ public class MessageCenter implements Runnable {
     @Override
     public synchronized void run() {
         while (true) {
+            if (stop) break;
             if (!buffer.isEmpty()) {
                 Message message = buffer.pollFirst();
                 System.out.println(message);
@@ -33,4 +34,12 @@ public class MessageCenter implements Runnable {
         notifyAll();
     }
 
+    public synchronized boolean prepareToShutdown() {
+        while (!buffer.isEmpty()) {
+            System.out.println(buffer.pollFirst());
+        }
+        stop = true;
+        notifyAll();
+        return true;
+    }
 }

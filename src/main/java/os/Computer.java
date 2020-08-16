@@ -32,7 +32,7 @@ public class Computer implements Bootable {
     @Override
     public boolean start() {
         if (boot()) {
-            messageCenter.addMessage(new Message(this, "Boot", "boot os...", MessageLevel.WARNING));
+            messageCenter.addMessage(new Message(this, "Boot", "start os...", MessageLevel.WARNING));
             return true;
         } else {
             System.out.println(this + " start error!");
@@ -54,6 +54,7 @@ public class Computer implements Bootable {
     @Override
     public void shutdown() {
         messageCenter.addMessage(new Message(this, "Shutdown", "shutdown os...", MessageLevel.WARNING));
+        messageCenter.prepareToShutdown();
         messageService.shutdown();
     }
 
