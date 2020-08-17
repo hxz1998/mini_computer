@@ -6,7 +6,7 @@ package util;
 
 public class Message {
     private Object informer;
-    private String title;
+    private String title = "";
     private String content;
     private MessageLevel level = MessageLevel.INFORMATION;
 

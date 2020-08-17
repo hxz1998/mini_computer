@@ -16,13 +16,21 @@ public class Computer implements Bootable {
     private Kernel kernel = null;
     private MessageCenter messageCenter;
     private ExecutorService messageService;
+    private Hardware hardware;
 
     public Computer(String name, MessageCenter messageCenter, Hardware hardware) {
         this.name = name;
         this.messageCenter = messageCenter;
         messageService = Executors.newSingleThreadExecutor();
-        messageService.submit(messageCenter);
-        kernel = new Kernel(hardware, messageCenter);
+        this.hardware = hardware;
+    }
+
+    public Kernel getKernel() {
+        return kernel;
+    }
+
+    public void setKernel(Kernel kernel) {
+        this.kernel = kernel;
     }
 
     public void setMessageCenter(MessageCenter messageCenter) {
@@ -32,7 +40,8 @@ public class Computer implements Bootable {
     @Override
     public boolean start() {
         if (boot()) {
-            messageCenter.addMessage(new Message(this, "Boot", "start os..."));
+            messageCenter.addMessage(new Message(this, "Start", "start os..."));
+            messageService.submit(messageCenter);
             return true;
         } else {
             System.out.println(this + " start error!");
@@ -62,7 +71,10 @@ public class Computer implements Bootable {
     public static void main(String[] args) {
         Hardware hardware = new Hardware();
         MessageCenter messageCenter = new MessageCenter();
+        messageCenter.setWindows(hardware.getDisplay().getTextArea());
+        Kernel kernel = new Kernel(hardware, messageCenter);
         Computer computer = new Computer("cherry", messageCenter, hardware);
+        computer.setKernel(kernel);
         computer.start();
         computer.shutdown();
     }

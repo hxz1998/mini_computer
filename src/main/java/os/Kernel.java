@@ -37,6 +37,6 @@ public class Kernel implements Bootable {
 
     @Override
     public String toString() {
-        return "Kernel{Mini-Computer " + version + " }";
+        return "[ Kernel Mini-Computer " + version + " ] ";
     }
 }
