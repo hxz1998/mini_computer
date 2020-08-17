@@ -4,5 +4,14 @@
  */
 package os;
 
-public class Display {
+public class Display implements Device {
+    @Override
+    public boolean install() {
+        return true;
+    }
+
+    @Override
+    public boolean detach() {
+        return true;
+    }
 }

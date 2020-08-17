@@ -4,5 +4,14 @@
  */
 package os;
 
-public class Disk {
+public class Disk implements Device {
+    @Override
+    public boolean install() {
+        return true;
+    }
+
+    @Override
+    public boolean detach() {
+        return true;
+    }
 }

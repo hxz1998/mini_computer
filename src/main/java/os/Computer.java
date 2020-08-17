@@ -13,16 +13,16 @@ import java.util.concurrent.Executors;
 
 public class Computer implements Bootable {
     private final String name;
-    private final Hardware hardware;
+    private Kernel kernel = null;
     private MessageCenter messageCenter;
     private ExecutorService messageService;
 
-    public Computer(String name, Hardware hardware, MessageCenter messageCenter) {
+    public Computer(String name, MessageCenter messageCenter, Hardware hardware) {
         this.name = name;
-        this.hardware = hardware;
         this.messageCenter = messageCenter;
         messageService = Executors.newSingleThreadExecutor();
         messageService.submit(messageCenter);
+        kernel = new Kernel(hardware, messageCenter);
     }
 
     public void setMessageCenter(MessageCenter messageCenter) {
@@ -32,7 +32,7 @@ public class Computer implements Bootable {
     @Override
     public boolean start() {
         if (boot()) {
-            messageCenter.addMessage(new Message(this, "Boot", "start os...", MessageLevel.WARNING));
+            messageCenter.addMessage(new Message(this, "Boot", "start os..."));
             return true;
         } else {
             System.out.println(this + " start error!");
@@ -47,13 +47,14 @@ public class Computer implements Bootable {
 
     @Override
     public boolean boot() {
-        messageCenter.addMessage(new Message(this, "Boot", "boot os...", MessageLevel.WARNING));
-        return hardware.checkHardware();
+        messageCenter.addMessage(new Message(this, "Boot", "boot os..."));
+        return kernel.boot();
     }
 
     @Override
     public void shutdown() {
         messageCenter.addMessage(new Message(this, "Shutdown", "shutdown os...", MessageLevel.WARNING));
+        kernel.shutdown();
         messageCenter.prepareToShutdown();
         messageService.shutdown();
     }
@@ -61,7 +62,7 @@ public class Computer implements Bootable {
     public static void main(String[] args) {
         Hardware hardware = new Hardware();
         MessageCenter messageCenter = new MessageCenter();
-        Computer computer = new Computer("cherry", hardware, messageCenter);
+        Computer computer = new Computer("cherry", messageCenter, hardware);
         computer.start();
         computer.shutdown();
     }

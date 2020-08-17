@@ -8,7 +8,7 @@ public class Message {
     private Object informer;
     private String title;
     private String content;
-    private MessageLevel level;
+    private MessageLevel level = MessageLevel.INFORMATION;
 
     public Message() {
     }
@@ -65,6 +65,6 @@ public class Message {
 
     @Override
     public String toString() {
-        return informer + level.toString() + " : [" + title + ": " + content + "]";
+        return informer + " " + level.toString() + " : [" + title + ": " + content + "]";
     }
 }

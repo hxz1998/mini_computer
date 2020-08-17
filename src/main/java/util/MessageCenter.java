@@ -30,7 +30,7 @@ public class MessageCenter implements Runnable {
     }
 
     public synchronized void addMessage(Message message) {
-        buffer.push(message);
+        buffer.offerLast(message);
         notifyAll();
     }
 

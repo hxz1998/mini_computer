@@ -4,7 +4,7 @@
  */
 package os;
 
-public class Hardware {
+public class Hardware implements Device{
     private Disk disk;
     private Display display;
     private Keyboard keyboard;
@@ -25,4 +25,13 @@ public class Hardware {
         return disk != null && display != null && keyboard != null;
     }
 
+    @Override
+    public boolean install() {
+        return true;
+    }
+
+    @Override
+    public boolean detach() {
+        return true;
+    }
 }
