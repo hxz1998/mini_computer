@@ -30,7 +30,7 @@ public class Hardware implements Device {
     @Override
     public boolean install() {
         disk.install();
-        display.install();
+//        display.install();
         keyboard.install();
         return true;
     }

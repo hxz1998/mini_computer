@@ -46,7 +46,9 @@ public class MessageCenter implements Runnable {
     }
 
     private void print(Message message) {
-        if (jTextArea == null) System.out.println(message);
+        if (jTextArea == null)
+            if (message.getLevel() == MessageLevel.TERMINAL) System.out.print(message);
+            else System.out.println(message);
         else jTextArea.append(message + "\n");
     }
 

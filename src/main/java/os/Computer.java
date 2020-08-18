@@ -4,6 +4,7 @@
  */
 package os;
 
+import program.Terminal;
 import util.Message;
 import util.MessageCenter;
 import util.MessageLevel;
@@ -71,11 +72,15 @@ public class Computer implements Bootable {
     public static void main(String[] args) {
         Hardware hardware = new Hardware();
         MessageCenter messageCenter = new MessageCenter();
-        messageCenter.setWindows(hardware.getDisplay().getTextArea());
+//        messageCenter.setWindows(hardware.getDisplay().getTextArea());
         Kernel kernel = new Kernel(hardware, messageCenter);
         Computer computer = new Computer("cherry", messageCenter, hardware);
         computer.setKernel(kernel);
         computer.start();
-        computer.shutdown();
+        Terminal terminal = new Terminal(messageCenter);
+        Thread thread = new Thread(terminal);
+        thread.start();
+        kernel.setTerminal(terminal);
+//        computer.shutdown();
     }
 }

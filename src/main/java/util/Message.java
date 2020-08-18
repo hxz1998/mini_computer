@@ -65,6 +65,6 @@ public class Message {
 
     @Override
     public String toString() {
-        return informer + " " + level.toString() + " : [" + title + ": " + content + "]";
+        return level == MessageLevel.TERMINAL ? informer + content : informer + " " + level.toString() + " : [" + title + ": " + content + "]";
     }
 }

@@ -1,5 +1,5 @@
 package util;
 
 public enum MessageLevel {
-    INFORMATION, WARNING, ERROR;
+    INFORMATION, WARNING, ERROR, TERMINAL;
 }

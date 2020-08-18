@@ -4,6 +4,6 @@
  */
 package program;
 
-public class ExecuteResult {
+public class FunctionResult {
 
 }
