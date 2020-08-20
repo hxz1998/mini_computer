@@ -2,8 +2,11 @@
  * Created by Xiaozhong on 2020/8/16.
  * Copyright (c) 2020/8/16 Xiaozhong. All rights reserved.
  */
-package os;
+package os.kernel;
 
+import os.Computer;
+import os.boot.Bootable;
+import os.boot.Hardware;
 import program.Terminal;
 import util.Message;
 import util.MessageCenter;

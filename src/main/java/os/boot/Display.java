@@ -2,7 +2,7 @@
  * Created by Xiaozhong on 2020/8/16.
  * Copyright (c) 2020/8/16 Xiaozhong. All rights reserved.
  */
-package os;
+package os.boot;
 
 import javax.swing.*;
 import java.awt.*;

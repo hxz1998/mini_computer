@@ -1,4 +1,4 @@
-package os;
+package os.boot;
 
 public interface Device {
     boolean install();

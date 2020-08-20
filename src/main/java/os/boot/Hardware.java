@@ -2,7 +2,7 @@
  * Created by Xiaozhong on 2020/8/16.
  * Copyright (c) 2020/8/16 Xiaozhong. All rights reserved.
  */
-package os;
+package os.boot;
 
 public class Hardware implements Device {
     private Disk disk;

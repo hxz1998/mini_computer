@@ -4,6 +4,9 @@
  */
 package os;
 
+import os.boot.Bootable;
+import os.boot.Hardware;
+import os.kernel.Kernel;
 import program.Terminal;
 import util.Message;
 import util.MessageCenter;
